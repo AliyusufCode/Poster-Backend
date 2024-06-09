@@ -8,17 +8,25 @@ import {
   postCreateValidation,
   registerValidation,
 } from "./validations/auth.js";
+import { config } from "dotenv";
 import * as UserController from "./controllers/UserController.js";
 import * as PostController from "./controllers/PostController.js";
 import * as CommentController from "./controllers/CommentController.js";
 
 import checkAuth from "./utils/checkAuth.js";
 import handleValidationError from "./utils/handleValidationError.js";
-
+config();
 mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => console.log("DB Ok"))
-  .catch((err) => console.log("error", err));
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Подключение к MongoDB успешно");
+  })
+  .catch((error) => {
+    console.error("Ошибка подключения к MongoDB:", error);
+  });
 
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
