@@ -39,7 +39,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 const app = express();
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.send("Hello Word!");
 });
 app.use(express.json());
 app.use(cors());
@@ -99,3 +99,4 @@ app.listen(process.env.PORT || 4444, (err) => {
     console.log("server ok");
   }
 });
+export default app;
