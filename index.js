@@ -96,11 +96,12 @@ app.get("/posts/:id", PostController.getOne);
 app.delete("/posts/:id", checkAuth, PostController.remove);
 app.patch("/posts/:id", handleValidationError, PostController.update);
 
-app.listen(process.env.PORT || 4444, (err) => {
+const PORT = process.env.PORT || 4444;
+app.listen(PORT, (err) => {
   if (err) {
     console.log(err);
   } else {
-    console.log("server ok");
+    console.log(`Сервер запущен на порту ${PORT}`);
   }
 });
 export default app;
